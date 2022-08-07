@@ -1,4 +1,4 @@
-# Exploratory Data An alyssis app using Pandas Profiling and Sweetvix
+# Exploratory Data An alyssis app using Pandas Profiling, Sweetviz, and AutoViz
 
 This EDA app will help you generate quick EDA reports from either Sweetviz or Pandas Profiling
 
