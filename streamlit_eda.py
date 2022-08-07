@@ -8,6 +8,8 @@ from PIL import Image
 import codecs
 import streamlit.components.v1 as components
 import sweetviz as sv
+from autoviz.AutoViz_Class import AutoViz_Class
+
 
 def st_display_sweetviz(report_html,width=1000,height=500):
 	report_file = codecs.open(report_html,'r')
@@ -51,16 +53,27 @@ if uploaded_file is not None:
        df,
        editable = True,
        height = 300,
-       width = '100%',
-    )
+       width = '100%',)
 
     updated = grid_response['data']
     df1 = pd.DataFrame(updated)
 
     if st.button('Generate Pandas Profiling Report'):
-        profile = ProfileReport(df)
+        profile = ProfileReport(df1)
         st_profile_report(profile)
     elif st.button('Generate Sweetviz Report'):
-        report = sv.analyze(df)
+        report = sv.analyze(df1)
         report.show_html()
         st_display_sweetviz("SWEETVIZ_REPORT.html")
+    elif st.button('Generate Autoviz Report'):
+        AV = AutoViz_Class()
+        dft = AV.AutoViz(filename = '',
+        sep=',',
+        depVar="",
+        dfte=df1,
+        header=0,
+        verbose=2,
+        lowess=False,
+        chart_format="html",
+        max_rows_analyzed=2000,
+        max_cols_analyzed=20,)
